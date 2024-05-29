@@ -11,6 +11,4 @@ class Entry(models.Model):
     zivotopis = models.FileField()
     motivacni_dopis = models.FileField() 
 
-    def __str__(self):
-        return self.name
 

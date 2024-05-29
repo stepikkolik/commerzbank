@@ -20,9 +20,9 @@ from commerzbank_real_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.op),
+    # path('', views.op),
     # path('', views.get_name),
-    # path('', views.register),
+    path('', views.register),
     path("__reload__/", include("django_browser_reload.urls")),
 
 ]

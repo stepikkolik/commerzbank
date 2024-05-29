@@ -20,6 +20,7 @@
                 <img src="{% static 'src/images/Down.svg' %}" alt="">
             </div>     
             <img src="{% static 'src/images/ssps_logo.svg' %}" alt="">
+
         </div>
     </div>
     <div id="0" class="flex xl:flex-row flex-col h-[70rem] xl:h-firstparagraph bg-silver w-screen xl:pl-40 pl-10 xl:pr-40 pr-10 pt-40 gap-12">
@@ -172,41 +173,57 @@
     </div>
 
 
+
     <div id="1" class="py-16 pt-20">
         <div class="max-w-4xl mx-auto pl-8 pr-8 pt-20 pb-40 pd-border rounded-lg shadow-2xl bg-silver">
             <h2 class="text-3xl font-bold mb-8 pb-28">Registruj se</h2>
-            <form class="space-y-6">
+            <form class="space-y-6" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if success_message %}
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ success_message }}</span>
+                    </div>
+                {% endif %}
                 <div class="flex space-x-4">
-                    <input type="text" placeholder="Jméno" class="w-full p-3 border rounded-lg">
-                    <input type="text" placeholder="Příjmení" class="w-full p-3 border rounded-lg">
+                    <div class="w-full border rounded-lg">
+                        {{ form.first_name }}
+                        {{ form.first_name.errors }}
+                    </div>
+                    <div class="w-full border rounded-lg">
+                        {{ form.last_name }}
+                        {{ form.last_name.errors }}
+                    </div>
                 </div>
-                <input type="email" placeholder="Email" class="w-full p-3 border rounded-lg">
-                <input type="tel" placeholder="Telefonní číslo" class="w-full p-3 border rounded-lg">
+                <div class="w-full border rounded-lg">
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div class="w-full border  rounded-lg">
+                    {{ form.phone_number }}
+                    {{ form.phone_number.errors }}
+                </div>
                 <div class="flex flex-col xl:flex-row gap-2">
                     <div class="w-full border-dashed border-2 border-gray-300 rounded-lg p-4 text-center">
                         <p>Životopis:</p>
                         <div class="mt-4 text-yellow-500">
-                            <img class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" src="{% static 'src/images/upload.svg' %}">
-                            <input type="file" class="opacity-0" name="" id="">
+                            <img class="w-12 h-12 mx-auto" src="{% static 'src/images/upload.svg' %}">
+                            {{ form.zivotopis }}
+                            {{ form.zivotopis.errors }}
                         </div>
                         <p class="mt-2 text-gray-600">Drag your file here</p>
                     </div>
                     <div class="w-full border-dashed border-2 border-gray-300 rounded-lg p-4 text-center items-center">
                         <p>Motivační dopis:</p>
                         <div id="inputField" class="mt-4 text-yellow-500">
-                            <img class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                src="{% static 'src/images/upload.svg' %}">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7m-6-5l-4-4m0 0L4 7m6-5v10">
-                                </path>
-                                <input type="file" class="opacity-0" name="" id="">
+                            <img class="w-12 h-12 mx-auto" src="{% static 'src/images/upload.svg' %}">
+                            {{ form.motivacni_dopis }}
+                            {{ form.motivacni_dopis.errors }}
                         </div>
                         <p class="mt-2 text-gray-600">Drag your file here</p>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit"
-                        class="px-6 py-3 bg-gradient-to-r from-black to-yellow-400 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 xl:w-[40rem] w-[20rem] transition-all">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-black to-yellow-400 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 xl:w-[40rem] w-[20rem] transition-all">
                         Registruj se
                     </button>
                 </div>
@@ -216,7 +233,7 @@
  
     <div class="h-96 bg-darkCommerz w-screen flex justify-center gap-52 xl:pl-0 xl:pr-0 pl-6 pr-6">
             <div class=" w-96 flex flex-col justify-center gap-12">
-                <img src="images/commerz_logo.svg" alt="">
+                <img src="{% static 'src/images/commerz_logo.svg' %}" alt="">
                 <p class="text-gray-300">Copyright © 2022 Commerzbank AG <br> All rights reserved</p>
             </div>
             <div class=" w-96 flex flex-col justify-center gap-8">
