@@ -1,3 +1,3 @@
 <?php
-readfile('./src/index.html');
+readfile('./index.html');
 ?>
